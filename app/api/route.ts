@@ -2,17 +2,15 @@ import { connectDB } from "@/lib/config/db";
 import { NextResponse } from "next/server";
 import todomodel from "@/lib/models/todomodel";
 
-
-const loadDB = async () => {
     await connectDB();
-}
-loadDB();
+
 
 export async function GET() {
   try {
 
   
-  const todos=await todomodel.find({})
+  
+  const todos = await todomodel.find({}).lean();
   return NextResponse.json({todos:todos})
 
   } catch (error) {
@@ -41,9 +39,9 @@ try {
 }
 
 export async function DELETE(request: Request) {
-  const { id } = await request.json();
+  const { _id } = await request.json();
   try {
-    await todomodel.findByIdAndDelete(id);
+    await todomodel.findByIdAndDelete(_id);
     return NextResponse.json({ message: "Todo deleted successfully" });
   } catch (error) {
     return NextResponse.json(
@@ -54,9 +52,9 @@ export async function DELETE(request: Request) {
 }
 
 export async function PUT(request: Request) {
-  const { id, title, description } = await request.json();
+  const { _id, title, description } = await request.json();
   try {
-    await todomodel.findByIdAndUpdate(id, { title, description });
+    await todomodel.findByIdAndUpdate(_id, { title, description });
     return NextResponse.json({ message: "Todo updated successfully" });
   } catch (error) {
     return NextResponse.json(
