@@ -41,5 +41,5 @@ const authSchema = new mongoose.Schema({
     timeStamp: true
 })
 
-const AuthModel = mongoose.models.auth || mongoose.model('auth',authSchema) //singleton: avoids error if already created
+const AuthModel = mongoose.models.auth || mongoose.model('auth',authSchema) 
 export default AuthModel

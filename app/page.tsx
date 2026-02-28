@@ -25,7 +25,7 @@ export default function Home() {
 
   const fetchTasks = async () => {
     try {
-      const response = await axios.get("/api");
+      const response = await axios.get("/api/todo");
       setTasks(response.data.todos);
     } catch (error) {
       console.log(error);
@@ -39,9 +39,12 @@ export default function Home() {
 
   const deleteTask = async (_id: string) => {
     try {
-      await axios.delete("/api", { data: { _id } });
+      await axios.delete("/api/todo", { data: { _id } });
       setTasks((prev) => prev.filter((task) => task._id !== _id));
-      toast.success("Task Deleted Successfully 🗑️");
+         toast.success("Task Deleted Successfully 🗑️",{
+          autoClose: 1000,
+         });
+  
     } catch (error) {
       toast.error("Failed to delete task");
     }
@@ -71,7 +74,7 @@ export default function Home() {
     e.preventDefault();
 
     try {
-      const response = await axios.post("/api", formData);
+      const response = await axios.post("/api/todo", formData);
       toast.success(response.data.message);
 
       setFormData({

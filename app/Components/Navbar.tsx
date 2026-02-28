@@ -20,7 +20,7 @@ const Navbar = () => {
       </ul>
       <ul>
         <li>
-        <Link href="/login" className="hover:text-blue-500 cursor-pointer">Login</Link>
+        <Link href="/Auth" className="hover:text-blue-500 cursor-pointer">Login</Link>
         </li>
       </ul>
      <Counter />
